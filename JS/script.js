@@ -5,6 +5,8 @@ const numberElement = document.querySelector('.number-element');
 console.log(numberElement)
 const totalRandomNumbers = 5;
 const arrayRandomNumbers = [];
+const inputElement = document.querySelectorAll('input')
+console.log('sono gli input', inputElement)
 
 //#FUNZIONE PER GENERARE NUMERI RANDOM
 const generateRandomNumber = (min,max,randomNumbers)=>{
@@ -35,7 +37,7 @@ numberPrinter();
 
 
 //# FUNZIONE PER FAR SPARIRE I NUMERI
-const disappearNumbers = ()=>{
+const removeNumbers = ()=>{
     numberElement.style.display='none'
 }
 
@@ -44,7 +46,7 @@ const timer = 2 * 1000;
 
 //CREO TIMER PER ATTIVAZIONE FUNZIONE
 setTimeout(function(){
-    disappearNumbers();
+    removeNumbers();
 },timer);
 
 let firstNumber = 0;
@@ -53,15 +55,26 @@ let thirdNumber = 0;
 let fourthNumber = 0;
 let fifthNumber = 0;
 
-//CREO FUNZIONE CHE CHIEDE I NUMERI ALL'UTENTE
+//# CREO FUNZIONE CHE MOSTRA I TAG INPUT
+const showInput = ()=>{
+    inputElement.forEach(function(input){
+        input.classList.remove('d-none');
+        console.log('eccolliiii', inputElement)
+    })
+}
+
+//# CREO FUNZIONE CHE CHIEDE I NUMERI ALL'UTENTE
 const userAnswer = []
 const askNumbers = ()=>{
+    //MOSTRO GLI INPUT ELEMENT
+    showInput();
     // CHIEDO I NUMERI ALL'UTENTE
-    firstNumber = parseInt(prompt('dimmi il primo numero', 1))
-    secondNumber = parseInt(prompt('dimmi il secondo numero', 2))
-    thirdNumber = parseInt(prompt('dimmi il terzo numero', 3))
-    fourthNumber = parseInt(prompt('dimmi il quarto numero', 4))
-    fifthNumber = parseInt(prompt('dimmi il quinto numero', 5))
+    
+    // firstNumber = parseInt(prompt('dimmi il primo numero', 1))
+    // secondNumber = parseInt(prompt('dimmi il secondo numero', 2))
+    // thirdNumber = parseInt(prompt('dimmi il terzo numero', 3))
+    // fourthNumber = parseInt(prompt('dimmi il quarto numero', 4))
+    // fifthNumber = parseInt(prompt('dimmi il quinto numero', 5))
     userAnswer.push(firstNumber,secondNumber,thirdNumber,fourthNumber,fifthNumber);
     console.table('risposte utente' ,userAnswer)
     return userAnswer;
