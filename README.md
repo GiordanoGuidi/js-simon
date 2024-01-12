@@ -14,3 +14,6 @@ BONUS:
 Come detto, le validazioni
 Volendo, potreste provare a farlo con degli input che compaiono in pagina dopo che scompaiono i numeri, invece che coi prompt
 Buon lavoro e buon weekend!
+
+# Problem breakdown 
+1 GENRO 5 NUMERI CASUALI E LI STAMPOI IN PAGINA
