@@ -17,7 +17,6 @@ const generateRandomNumber = (min,max,randomNumbers)=>{
     return arrayRandomNumbers;
 }
 
-(generateRandomNumber(1,100,totalRandomNumbers));
 
 //# FUNZIONE PER STAMPARE IN PAGINA I NUMERI RANDOM
 const numberPrinter = ()=>{
@@ -27,6 +26,14 @@ const numberPrinter = ()=>{
     }
     console.log(numberElement)
 }
+
+
+(generateRandomNumber(1,100,totalRandomNumbers));
 numberPrinter();
 
+// FUNZIONE PER FAR SPARIRE I NUMERI
+const disappearNumbers = ()=>{
+    numberElement.style.display='none'
+}
+disappearNumbers();
 
