@@ -29,6 +29,7 @@ const numberPrinter = ()=>{
 
 //GENERO 5 NUMERI RANDOM
 (generateRandomNumber(1,100,totalRandomNumbers));
+
 //STAMPO IN PAGINA I NUMERI
 numberPrinter();
 
@@ -37,10 +38,39 @@ numberPrinter();
 const disappearNumbers = ()=>{
     numberElement.style.display='none'
 }
+
 // FACCIO VARIABILE TEMPO IN SECONDI
-const timer = 30 * 1000;
+const timer = 2 * 1000;
+let numbers = true
+
 //CREO TIMER PER ATTIVAZIONE FUNZIONE
 setTimeout(function(){
     disappearNumbers();
+    numbers = false
 },timer);
+
+let firstNumber;
+let secondNumber; 
+let thirdNumber;
+let fourthNumber; 
+let fifthNumber;
+
+//CREO FUNZIONE CHE CHIEDE I NUMERI ALL'UTENTE
+const askNumbers = ()=>{
+    // CHIEDO I NUMERI ALL'UTENTE
+    firstNumber = parseInt(prompt('dimmi il primo numero', 1))
+    secondNumber = parseInt(prompt('dimmi il primo numero', 2))
+    thirdNumber = parseInt(prompt('dimmi il primo numero', 3))
+    fourthNumber = parseInt(prompt('dimmi il primo numero', 4))
+    fifthNumber = parseInt(prompt('dimmi il primo numero', 5))
+}
+// CREO TIMER PIU' LUNGO DEL PRECEDENTE PER ATTIVARE FUNZIONE
+setTimeout(function(){
+    askNumbers();
+},timer + 10)
+
+
+
+
+
 
