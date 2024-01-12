@@ -41,33 +41,49 @@ const disappearNumbers = ()=>{
 
 // FACCIO VARIABILE TEMPO IN SECONDI
 const timer = 2 * 1000;
-let numbers = true
 
 //CREO TIMER PER ATTIVAZIONE FUNZIONE
 setTimeout(function(){
     disappearNumbers();
-    numbers = false
 },timer);
 
-let firstNumber;
-let secondNumber; 
-let thirdNumber;
-let fourthNumber; 
-let fifthNumber;
+let firstNumber = 0;
+let secondNumber = 0;
+let thirdNumber = 0;
+let fourthNumber = 0;
+let fifthNumber = 0;
 
 //CREO FUNZIONE CHE CHIEDE I NUMERI ALL'UTENTE
+const userAnswer = []
 const askNumbers = ()=>{
     // CHIEDO I NUMERI ALL'UTENTE
     firstNumber = parseInt(prompt('dimmi il primo numero', 1))
-    secondNumber = parseInt(prompt('dimmi il primo numero', 2))
-    thirdNumber = parseInt(prompt('dimmi il primo numero', 3))
-    fourthNumber = parseInt(prompt('dimmi il primo numero', 4))
-    fifthNumber = parseInt(prompt('dimmi il primo numero', 5))
+    secondNumber = parseInt(prompt('dimmi il secondo numero', 2))
+    thirdNumber = parseInt(prompt('dimmi il terzo numero', 3))
+    fourthNumber = parseInt(prompt('dimmi il quarto numero', 4))
+    fifthNumber = parseInt(prompt('dimmi il quinto numero', 5))
+    userAnswer.push(firstNumber,secondNumber,thirdNumber,fourthNumber,fifthNumber);
+    console.table('risposte utente' ,userAnswer)
+    return userAnswer;
+    
 }
 // CREO TIMER PIU' LUNGO DEL PRECEDENTE PER ATTIVARE FUNZIONE
 setTimeout(function(){
     askNumbers();
+    //ARRAY NUMERI CORRETTI
+    const correctNumbers = [];
+    for(let i = 0; i < arrayRandomNumbers.length; i++){
+        if(arrayRandomNumbers[i] === userAnswer[i]){
+            // INSERISCO IN CORRECT NUMBERS I NUMERI CHE COMBACIANO
+            correctNumbers.push(userAnswer[i])
+            console.table('sono i numeri corretti',correctNumbers)
+            numberElement.style.display='block'
+
+        }
+        numberElement.innerHTML= `i numeri corretti sono: <strong>${correctNumbers}</strong>`;
+    }
 },timer + 10)
+
 
 
 

@@ -16,4 +16,7 @@ Volendo, potreste provare a farlo con degli input che compaiono in pagina dopo c
 Buon lavoro e buon weekend!
 
 # Problem breakdown 
-1 GENRO 5 NUMERI CASUALI E LI STAMPOI IN PAGINA
+1. GENERO 5 NUMERI CASUALI E LI STAMPOI IN PAGINA
+2. FACCIO UN TIMER DI 30 SECONDI
+3. CHIEDO I NUMERI CHE HA VISTO ALL'UTENTE
+4. DICIAMO QUANTI NUMERI SONO STATI INDOVINATI
