@@ -27,13 +27,20 @@ const numberPrinter = ()=>{
     console.log(numberElement)
 }
 
-
+//GENERO 5 NUMERI RANDOM
 (generateRandomNumber(1,100,totalRandomNumbers));
+//STAMPO IN PAGINA I NUMERI
 numberPrinter();
 
-// FUNZIONE PER FAR SPARIRE I NUMERI
+
+//# FUNZIONE PER FAR SPARIRE I NUMERI
 const disappearNumbers = ()=>{
     numberElement.style.display='none'
 }
-disappearNumbers();
+// FACCIO VARIABILE TEMPO IN SECONDI
+const timer = 30 * 1000;
+//CREO TIMER PER ATTIVAZIONE FUNZIONE
+setTimeout(function(){
+    disappearNumbers();
+},timer);
 
