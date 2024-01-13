@@ -1,10 +1,11 @@
-console.log('hello world')
 
 //# RECUPERO GLI ELEMENTI
 const numberElement = document.querySelector('.number-element');
 console.log(numberElement)
 const totalRandomNumbers = 5;
 const arrayRandomNumbers = [];
+const formElement = document.querySelector('form');
+console.log(formElement);
 const inputElement = document.querySelectorAll('input')
 console.log('sono gli input', inputElement)
 
@@ -18,7 +19,6 @@ const generateRandomNumber = (min,max,randomNumbers)=>{
     }
     return arrayRandomNumbers;
 }
-
 
 //# FUNZIONE PER STAMPARE IN PAGINA I NUMERI RANDOM
 const numberPrinter = ()=>{
@@ -35,7 +35,6 @@ const numberPrinter = ()=>{
 //STAMPO IN PAGINA I NUMERI
 numberPrinter();
 
-
 //# FUNZIONE PER FAR SPARIRE I NUMERI
 const removeNumbers = ()=>{
     numberElement.style.display='none'
@@ -44,58 +43,56 @@ const removeNumbers = ()=>{
 // FACCIO VARIABILE TEMPO IN SECONDI
 const timer = 2 * 1000;
 
-//CREO TIMER PER ATTIVAZIONE FUNZIONE
+//CREO TIMER PER ATTIVAZIONE FUNZIONE PER FAR SPARIRE I NUMERI
 setTimeout(function(){
     removeNumbers();
 },timer);
 
-let firstNumber = 0;
-let secondNumber = 0;
-let thirdNumber = 0;
-let fourthNumber = 0;
-let fifthNumber = 0;
 
-//# CREO FUNZIONE CHE MOSTRA I TAG INPUT
-const showInput = ()=>{
-    inputElement.forEach(function(input){
-        input.classList.remove('d-none');
-        console.log('eccolliiii', inputElement)
-    })
-}
+//# CREO FUNZIONE CHE MOSTRA IL FORM
+const showForm = ()=>{
+    formElement.classList.remove('d-none');
+    }
 
-//# CREO FUNZIONE CHE CHIEDE I NUMERI ALL'UTENTE
-const userAnswer = []
+//# CREO FUNZIONE PER RECUPERARE VALORI DEGLI INPUT
+const userAnswers = []
 const askNumbers = ()=>{
-    //MOSTRO GLI INPUT ELEMENT
-    showInput();
-    // CHIEDO I NUMERI ALL'UTENTE
-    
-    // firstNumber = parseInt(prompt('dimmi il primo numero', 1))
-    // secondNumber = parseInt(prompt('dimmi il secondo numero', 2))
-    // thirdNumber = parseInt(prompt('dimmi il terzo numero', 3))
-    // fourthNumber = parseInt(prompt('dimmi il quarto numero', 4))
-    // fifthNumber = parseInt(prompt('dimmi il quinto numero', 5))
-    userAnswer.push(firstNumber,secondNumber,thirdNumber,fourthNumber,fifthNumber);
-    console.table('risposte utente' ,userAnswer)
-    return userAnswer;
-    
+    // INSERISCO I VALORE DEGLI INPUT NELL'ARRAY
+    for(let i = 0;i < inputElement.length;i++){
+        userAnswers.push(parseInt(inputElement[i].value))
+    }return userAnswers;
 }
-// CREO TIMER PIU' LUNGO DEL PRECEDENTE PER ATTIVARE FUNZIONE
-setTimeout(function(){
-    askNumbers();
-    //ARRAY NUMERI CORRETTI
-    const correctNumbers = [];
-    for(let i = 0; i < arrayRandomNumbers.length; i++){
-        if(arrayRandomNumbers[i] === userAnswer[i]){
-            // INSERISCO IN CORRECT NUMBERS I NUMERI CHE COMBACIANO
-            correctNumbers.push(userAnswer[i])
-            console.table('sono i numeri corretti',correctNumbers)
-            numberElement.style.display='block'
 
+/*CREO TIMER PIU' LUNGO DEL PRECEDENTE PER ATTIVARE FUNZIONE
+CHE CHIEDE I NUMERI ALL'UTENTE*/
+setTimeout(function(){
+    //DICHIARO FUNZIONE CHE MOSTRA IL FORM
+    showForm();
+},timer + 10)
+
+
+// CREO ADD EVENT LISTNER SUL FORM
+formElement.addEventListener('submit',function(event){
+    event.preventDefault();
+    //RECUPERO I VALORI DEGLI INPUT
+    askNumbers();
+    // FACCIO SPARIRE IL FORM DOPO IL CLICK
+    formElement.classList.add('d-none');
+    //CONFRONTO I NUMERI DELL'UTENTE CON I NUMERI RANDOM
+    const correctNumbers = [];
+
+    for(let i = 0; i < arrayRandomNumbers.length; i++){
+        if(arrayRandomNumbers[i] === userAnswers[i]){
+            // INSERISCO IN CORRECT NUMBERS I NUMERI CHE COMBACIANO
+            correctNumbers.push(userAnswers[i])
+            //FACCIO COMPARIRE L'ELEMENTO
+            numberElement.style.display='block'  
         }
+        // SCRIVO IN PAGINA IL MESSAGGIO
         numberElement.innerHTML= `i numeri corretti sono: <strong>${correctNumbers}</strong>`;
     }
-},timer + 10)
+})  
+
 
 
 
