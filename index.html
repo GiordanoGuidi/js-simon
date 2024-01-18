@@ -10,14 +10,13 @@
     <script defer src="JS/script.js"></script>
 </head>
 <body>
-    <div class="number-element"></div>
+    <div id="timer"></div>
+    <div class="number-element d-flex justify-content-center align-items-center flex-column mt-4">
+        <div id="countdown"></div>
+        <p>Memorizza i numeri entro il tempo limite :</p>
+        <ul id="number-list" class="d-flex gap-5 list-unstyled"></ul>
+    </div>
         <form action="" class="d-none">
-            <input type="number" placeholder="inserisci 1° numero" value="1" class="first-inpu">
-            <input type="number" placeholder="inserisci 2° numero" value="2" class="second-inpu">
-            <input type="number" placeholder="inserisci 3° numero" value="3" class="third-inpu">
-            <input type="number" placeholder="inserisci 4° numero" value="4" class="fourth-inpu">
-            <input type="number" placeholder="inserisci 5° numero" value="5" class="fifth-inpu">
-            <button> VAI</button>
         </form>
 </body>
 </html>

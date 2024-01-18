@@ -1,15 +1,15 @@
 
 //# RECUPERO GLI ELEMENTI
-const numberElement = document.querySelector('.number-element');
-console.log(numberElement)
+const numberListElement = document.getElementById('number-list');
 const totalRandomNumbers = 5;
 const arrayRandomNumbers = [];
 const formElement = document.querySelector('form');
 console.log(formElement);
 const inputElement = document.querySelectorAll('input')
-console.log('sono gli input', inputElement)
+const timerElement = document.getElementById('timer')
 
-//#FUNZIONE PER GENERARE NUMERI RANDOM
+
+//# FUNZIONE PER GENERARE NUMERI RANDOM
 const generateRandomNumber = (min,max,randomNumbers)=>{
     while(arrayRandomNumbers .length< totalRandomNumbers){
         let randomNumber =Math.floor(Math.random() * max - min + 1) + min;
@@ -20,41 +20,29 @@ const generateRandomNumber = (min,max,randomNumbers)=>{
     return arrayRandomNumbers;
 }
 
-//# FUNZIONE PER STAMPARE IN PAGINA I NUMERI RANDOM
+//# FUNZIONE PER STAMPARE IN PAGINA I NUMERI RANDOM E CREARE GLI INPUT
 const numberPrinter = ()=>{
-    for(let i = 0; i < arrayRandomNumbers.length ; i++ ){
-        numberElement.innerText += `  ${arrayRandomNumbers[i]},` ;
+    for(let i = 0; i < totalRandomNumbers ; i++ ){
         console.log('sono le i', arrayRandomNumbers[i])
+        items += `<li>${arrayRandomNumbers[i]}</li>`
+        inputs += `<input type="number" placeholder="inserisci 1° numero" value=""  class="first-inpu" required></input>`
     }
-    console.log(numberElement)
+    
+    numberListElement.innerHTML = items ;
+    formElement.innerHTML += inputs
 }
-
-//GENERO 5 NUMERI RANDOM
-(generateRandomNumber(1,100,totalRandomNumbers));
-
-//STAMPO IN PAGINA I NUMERI
-numberPrinter();
 
 //# FUNZIONE PER FAR SPARIRE I NUMERI
 const removeNumbers = ()=>{
     numberElement.style.display='none'
 }
 
-// FACCIO VARIABILE TEMPO IN SECONDI
-const timer = 2 * 1000;
-
-//CREO TIMER PER ATTIVAZIONE FUNZIONE PER FAR SPARIRE I NUMERI
-setTimeout(function(){
-    removeNumbers();
-},timer);
-
-
-//# CREO FUNZIONE CHE MOSTRA IL FORM
+//#  FUNZIONE CHE MOSTRA IL FORM
 const showForm = ()=>{
     formElement.classList.remove('d-none');
-    }
+}
 
-//# CREO FUNZIONE PER RECUPERARE VALORI DEGLI INPUT
+//# FUNZIONE PER RECUPERARE VALORI DEGLI INPUT
 const userAnswers = []
 const askNumbers = ()=>{
     // INSERISCO I VALORE DEGLI INPUT NELL'ARRAY
@@ -63,12 +51,28 @@ const askNumbers = ()=>{
     }return userAnswers;
 }
 
-/*CREO TIMER PIU' LUNGO DEL PRECEDENTE PER ATTIVARE FUNZIONE
-CHE CHIEDE I NUMERI ALL'UTENTE*/
-setTimeout(function(){
-    //DICHIARO FUNZIONE CHE MOSTRA IL FORM
-    showForm();
-},timer + 10)
+//GENERO 5 NUMERI RANDOM
+(generateRandomNumber(1,100,totalRandomNumbers));
+
+//STAMPO IN PAGINA I NUMERI
+let items = '';
+let inputs = '';
+numberPrinter();
+
+
+// FACCIO VARIABILE TEMPO IN SECONDI
+let timer = 3 * 1000;
+
+//CREO TIMER ATTIVAZIONE FUNZIONE PER FAR SPARIRE I NUMERI
+// setTimeout(function(){
+//     removeNumbers();
+// },timer);
+
+/*CREO TIMER PIU' LUNGO DEL PRECEDENTE PER MOSTRARE IL FORM*/
+// setTimeout(function(){
+//     //DICHIARO FUNZIONE CHE MOSTRA IL FORM
+//     showForm();
+// },timer + 10)
 
 
 // CREO ADD EVENT LISTNER SUL FORM
