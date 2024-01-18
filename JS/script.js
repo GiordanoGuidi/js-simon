@@ -26,7 +26,7 @@ const numberPrinter = ()=>{
     for(let i = 0; i < totalRandomNumbers ; i++ ){
         console.log('sono le i', arrayRandomNumbers[i])
         items += `<li>${arrayRandomNumbers[i]}</li>`
-        inputs += `<input type="number" placeholder="inserisci 1° numero" value=""  class="first-inpu" required></input>`
+        inputs += `<input type="number" min"1" max="100" value=""  class="first-inpu" required></input>`
     }
     
     numberListElement.innerHTML = items ;
@@ -53,7 +53,12 @@ const userAnswers = []
 const getUserAnswers = ()=>{
     // INSERISCO I VALORE DEGLI INPUT NELL'ARRAY
     for(let i = 0;i < inpuItems.length;i++){
-        userAnswers.push(parseInt(inpuItems[i].value))
+        const inputValue =  parseInt(inpuItems[i].value)
+        if(isNaN(inputValue)|| inputValue < 1|| inputValue > 100){
+            alert('devi inserire un numero compreso tra 1 e 100')
+            //RICARICO LA PAGINA IN CASO DI ALERT
+            window.location.reload();
+        }else userAnswers.push(inputValue)
     }return userAnswers;
 }
 
@@ -84,7 +89,7 @@ const interval = setInterval(()=>{
         showForm();
     }
 },1000);
-//! DOBBIAMO SISTEMARE L'INVIO DEL BOTTONE
+
 // CREO ADD EVENT LISTNER SUL FORM
 formElement.addEventListener('submit',function(event){
     event.preventDefault();
@@ -99,8 +104,8 @@ formElement.addEventListener('submit',function(event){
 
     for(let i = 0; i < arrayRandomNumbers.length; i++){
         console.table('array',arrayRandomNumbers, 'user',userAnswers)
-
-        if(arrayRandomNumbers[i] === userAnswers[i]){
+        //CONTROLLO SE L'ARRAY RANDOM NUMBERS CONTIENE LE RISPOSTE DELL'UTENTE
+        if(arrayRandomNumbers.includes(userAnswers[i])){
             // INSERISCO IN CORRECT NUMBERS I NUMERI CHE COMBACIANO
             correctNumbers.push(userAnswers[i])
             //FACCIO COMPARIRE L'ELEMENTO
