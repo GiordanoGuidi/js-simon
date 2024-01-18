@@ -6,7 +6,8 @@ const arrayRandomNumbers = [];
 const formElement = document.querySelector('form');
 console.log(formElement);
 const inputElement = document.querySelectorAll('input')
-const timerElement = document.getElementById('timer')
+const countdownElement = document.getElementById('countdown')
+const rulesElement = document.getElementById('rules')
 
 
 //# FUNZIONE PER GENERARE NUMERI RANDOM
@@ -34,7 +35,13 @@ const numberPrinter = ()=>{
 
 //# FUNZIONE PER FAR SPARIRE I NUMERI
 const removeNumbers = ()=>{
-    numberElement.style.display='none'
+    numberListElement.classList.add('d-none');
+    rulesElement.innerText = 'Inserisci i numeri che ti ricordi:';
+    //CREO IL BUTTON
+    const button = document.createElement('button');
+    button.innerText = 'VAI';
+    // LO AGGANCIO IN
+    formElement.appendChild(button)
 }
 
 //#  FUNZIONE CHE MOSTRA IL FORM
@@ -61,18 +68,21 @@ numberPrinter();
 
 
 // FACCIO VARIABILE TEMPO IN SECONDI
-let timer = 3 * 1000;
-
-//CREO TIMER ATTIVAZIONE FUNZIONE PER FAR SPARIRE I NUMERI
-// setTimeout(function(){
-//     removeNumbers();
-// },timer);
+let timer = 10;
+countdownElement.innerText = timer
+// CREO TIMER ATTIVAZIONE FUNZIONE PER FAR SPARIRE I NUMERI
+const interval = setInterval(()=>{
+    countdownElement.innerText = --timer;
+    if(timer === 0){
+        clearInterval(interval);
+    }
+},1000);
 
 /*CREO TIMER PIU' LUNGO DEL PRECEDENTE PER MOSTRARE IL FORM*/
-// setTimeout(function(){
-//     //DICHIARO FUNZIONE CHE MOSTRA IL FORM
-//     showForm();
-// },timer + 10)
+setTimeout(function(){
+    //DICHIARO FUNZIONE CHE MOSTRA IL FORM
+    showForm();
+},timer + 10)
 
 
 // CREO ADD EVENT LISTNER SUL FORM
