@@ -48,13 +48,12 @@ const removeNumbers = ()=>{
 const showForm = ()=>{
     formElement.classList.remove('d-none');
 }
-
 //# FUNZIONE PER RECUPERARE VALORI DEGLI INPUT
 const userAnswers = []
-const askNumbers = ()=>{
+const getUserAnswers = ()=>{
     // INSERISCO I VALORE DEGLI INPUT NELL'ARRAY
-    for(let i = 0;i < inputElement.length;i++){
-        userAnswers.push(parseInt(inputElement[i].value))
+    for(let i = 0;i < inpuItems.length;i++){
+        userAnswers.push(parseInt(inpuItems[i].value))
     }return userAnswers;
 }
 
@@ -66,44 +65,49 @@ let items = '';
 let inputs = '';
 numberPrinter();
 
+//RECUPERO GLI INPUT
+const inpuItems = document.querySelectorAll('input');
+console.log('input items', inpuItems)
 
 // FACCIO VARIABILE TEMPO IN SECONDI
-let timer = 10;
+let timer = 2;
 countdownElement.innerText = timer
 // CREO TIMER ATTIVAZIONE FUNZIONE PER FAR SPARIRE I NUMERI
 const interval = setInterval(()=>{
     countdownElement.innerText = --timer;
     if(timer === 0){
         clearInterval(interval);
+        //RIMUOVO I NUMERI
+        removeNumbers()
+        countdownElement.classList.add('d-none');
+        /*MOSTRO IL FORM*/
+        showForm();
     }
 },1000);
-
-/*CREO TIMER PIU' LUNGO DEL PRECEDENTE PER MOSTRARE IL FORM*/
-setTimeout(function(){
-    //DICHIARO FUNZIONE CHE MOSTRA IL FORM
-    showForm();
-},timer + 10)
-
-
+//! DOBBIAMO SISTEMARE L'INVIO DEL BOTTONE
 // CREO ADD EVENT LISTNER SUL FORM
 formElement.addEventListener('submit',function(event){
     event.preventDefault();
     //RECUPERO I VALORI DEGLI INPUT
-    askNumbers();
+    getUserAnswers();
     // FACCIO SPARIRE IL FORM DOPO IL CLICK
     formElement.classList.add('d-none');
+    //FACCIO SPARIRE LE REGOLE
+    rulesElement.classList.add('d-none');
     //CONFRONTO I NUMERI DELL'UTENTE CON I NUMERI RANDOM
     const correctNumbers = [];
 
     for(let i = 0; i < arrayRandomNumbers.length; i++){
+        console.table('array',arrayRandomNumbers, 'user',userAnswers)
+
         if(arrayRandomNumbers[i] === userAnswers[i]){
             // INSERISCO IN CORRECT NUMBERS I NUMERI CHE COMBACIANO
             correctNumbers.push(userAnswers[i])
             //FACCIO COMPARIRE L'ELEMENTO
-            numberElement.style.display='block'  
+            numberListElement.classList.remove('d-none')
         }
         // SCRIVO IN PAGINA IL MESSAGGIO
-        numberElement.innerHTML= `i numeri corretti sono: <strong>${correctNumbers}</strong>`;
+        numberListElement.innerHTML= `i numeri corretti sono: <strong>${correctNumbers}</strong>`;
     }
 })  
 
